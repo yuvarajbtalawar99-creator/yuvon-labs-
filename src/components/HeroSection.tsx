@@ -7,27 +7,37 @@ const HeroSection = () => {
     <section id="home" className="relative min-h-screen flex items-center overflow-hidden bg-[#020408]">
       {/* Background Effects - Removed grid and haze for clear black vibe */}
 
-      {/* Floating particles */}
+      {/* Floating particles - ENHANCED VARIETY & DEPTH */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-primary/30 rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              y: [-20, 20, -20],
-              opacity: [0.2, 0.5, 0.2],
-            }}
-            transition={{
-              duration: 3 + Math.random() * 2,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-            }}
-          />
-        ))}
+        {[...Array(30)].map((_, i) => {
+          const size = Math.random() * 1.5 + 0.5;
+          const opacity = Math.random() * 0.4 + 0.15;
+          const duration = 4 + Math.random() * 4;
+          return (
+            <motion.div
+              key={i}
+              className="absolute bg-primary rounded-full shadow-[0_0_2px_rgba(255,255,255,0.3)]"
+              style={{
+                width: size,
+                height: size,
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                opacity: opacity,
+              }}
+              animate={{
+                y: [0, Math.random() * 40 - 20, 0],
+                x: [0, Math.random() * 40 - 20, 0],
+                opacity: [opacity, opacity * 1.5, opacity],
+              }}
+              transition={{
+                duration: duration,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: Math.random() * 5,
+              }}
+            />
+          );
+        })}
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 relative z-10">
@@ -138,7 +148,7 @@ const HeroSection = () => {
                 </motion.div>
               </div>
 
-              {/* Orbital Paths - ULTRACLEAR & TRANSPARENT (NO MASKING) */}
+              {/* Orbital Paths - ENHANCED CONTRAST */}
               {[120, 180, 240, 320].map((radius, i) => (
                 <motion.div
                   key={i}
@@ -146,10 +156,11 @@ const HeroSection = () => {
                   style={{
                     width: radius * 2,
                     height: radius * 2,
-                    border: '1px solid rgba(255,255,255,0.12)',
+                    border: '1px solid rgba(255,255,255,0.18)',
+                    boxShadow: 'inset 0 0 15px rgba(255,255,255,0.03)',
                   }}
-                  animate={{ opacity: [0.3, 0.6, 0.3] }}
-                  transition={{ duration: 8, repeat: Infinity, delay: i * 0.5 }}
+                  animate={{ opacity: [0.4, 0.7, 0.4] }}
+                  transition={{ duration: 10, repeat: Infinity, delay: i * 0.8 }}
                 />
               ))}
 
@@ -190,7 +201,7 @@ const HeroSection = () => {
                             planet.color === 'bg-blue-500' ? '#3b82f6' : '#34d399'} 60%,
                         #000 100%
                       )`,
-                      boxShadow: `0 0 15px ${planet.glow}`,
+                      boxShadow: `0 0 25px ${planet.glow}`,
                     }}
                   >
                     {/* Depth shadow */}
