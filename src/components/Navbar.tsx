@@ -26,10 +26,10 @@ const Navbar = () => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-        ? 'bg-background/80 backdrop-blur-xl border-b border-border/50'
-        : 'bg-transparent'
+      transition={{ duration: 0.8, ease: 'easeOut' }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
+        ? 'bg-[#020408]/70 backdrop-blur-2xl border-b border-primary/20 shadow-[0_4px_30px_rgba(0,0,0,0.5)]'
+        : 'bg-transparent border-b border-transparent'
         }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -37,30 +37,47 @@ const Navbar = () => {
           {/* Logo */}
           <motion.a
             href="/#home"
-            className="flex items-center gap-3"
+            className="flex items-center gap-3 group"
             whileHover={{ scale: 1.02 }}
           >
-            <div className="flex items-end gap-[2px]">
+            <div className="flex items-end gap-[2px] relative">
+              {/* Logo Pulsing Ground Glow */}
+              <motion.div
+                className="absolute inset-x-0 bottom-0 h-4 bg-primary/20 blur-xl rounded-full"
+                animate={{ opacity: [0.2, 0.5, 0.2], scale: [0.8, 1.1, 0.8] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              />
+
               {/* V Logo Mark */}
               <svg
                 viewBox="0 0 100 100"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-[2.5rem] md:h-[3.5rem] w-auto mb-1"
+                className="h-[2.5rem] md:h-[3.5rem] w-auto mb-1 relative z-10"
               >
-                <path d="M0 0L40 100L55 100L15 0H0Z" fill="#22d3ee" />
-                <path d="M100 0L60 100L45 100L85 0H100Z" fill="#3b82f6" />
+                <motion.path
+                  d="M0 0L40 100L55 100L15 0H0Z"
+                  fill="#22d3ee"
+                  animate={{ fill: ['#22d3ee', '#3b82f6', '#22d3ee'] }}
+                  transition={{ duration: 5, repeat: Infinity }}
+                />
+                <motion.path
+                  d="M100 0L60 100L45 100L85 0H100Z"
+                  fill="#3b82f6"
+                  animate={{ fill: ['#3b82f6', '#22d3ee', '#3b82f6'] }}
+                  transition={{ duration: 5, repeat: Infinity }}
+                />
               </svg>
 
               {/* YO */}
-              <span className="text-[2.5rem] md:text-[3.5rem] font-bold leading-none tracking-tight font-['Outfit'] text-cyan-400">
+              <span className="text-[2.5rem] md:text-[3.5rem] font-bold leading-none tracking-tight font-['Outfit'] text-cyan-400 relative z-10 group-hover:text-white transition-colors duration-500">
                 YO
               </span>
 
 
               {/* N + LABS */}
-              <div className="flex flex-col items-center leading-none translate-y-[1px]">
-                <span className="text-[2.5rem] md:text-[3.5rem] font-bold tracking-tight font-['Outfit'] text-cyan-400">
+              <div className="flex flex-col items-center leading-none translate-y-[1px] relative z-10">
+                <span className="text-[2.5rem] md:text-[3.5rem] font-bold tracking-tight font-['Outfit'] text-cyan-400 group-hover:text-white transition-colors duration-500">
                   N
                 </span>
 
