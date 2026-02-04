@@ -74,28 +74,33 @@ const TeamSection = () => {
                     {teamMembers.map((member, index) => (
                         <motion.div
                             key={member.name}
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
+                            initial={{ opacity: 0, scale: 0.9, y: 30 }}
+                            whileInView={{ opacity: 1, scale: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
-                            whileHover={{ y: -5 }}
-                            className={`glass-card-glow group p-6 flex flex-col items-center text-center ${member.name === 'Yuvaraj' ? 'border-primary/40 ring-1 ring-primary/20 scale-105 z-10' : ''}`}
+                            transition={{ delay: index * 0.1, duration: 0.8 }}
+                            whileHover={{ y: -10, transition: { duration: 0.4 } }}
+                            className={`glass-card-glow group p-6 flex flex-col items-center text-center transition-all duration-500 relative ${member.name === 'Yuvaraj'
+                                    ? 'border-primary/40 shadow-[0_0_20px_rgba(34,211,238,0.15)] ring-1 ring-primary/20 scale-105 z-10 bg-primary/5'
+                                    : 'hover:bg-white/5'
+                                }`}
                         >
                             <div className="relative mb-6">
-                                <div className="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-2 border-primary/20 group-hover:border-primary/50 transition-colors duration-300">
+                                <div className="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-2 border-primary/20 group-hover:border-primary/60 transition-all duration-500 shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] relative">
                                     {member.image ? (
                                         <img
                                             src={member.image}
                                             alt={member.name}
-                                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                         />
                                     ) : (
                                         <div className="w-full h-full bg-muted flex items-center justify-center">
-                                            <p className="text-[10px] text-muted-foreground">No Image</p>
+                                            <p className="text-[10px] text-muted-foreground font-bold tracking-tighter">NO IMG</p>
                                         </div>
                                     )}
+                                    {/* Inner Shadow Overlay */}
+                                    <div className="absolute inset-0 rounded-full shadow-[inset_0_0_15px_rgba(0,0,0,0.6)] pointer-events-none" />
                                 </div>
-                                <div className="absolute -inset-1 rounded-full bg-primary/20 blur opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
+                                <div className="absolute -inset-2 rounded-full bg-primary/25 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10" />
                             </div>
 
                             <div className="relative z-10 w-full">

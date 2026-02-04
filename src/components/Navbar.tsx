@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 const navLinks = [
   { name: 'Home', href: '/#home' },
@@ -13,81 +13,94 @@ const navLinks = [
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { scrollYProgress } = useScroll();
+
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 20);
     };
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.8, ease: 'easeOut' }}
+    <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
-        ? 'bg-[#020408]/70 backdrop-blur-2xl border-b border-primary/20 shadow-[0_4px_30px_rgba(0,0,0,0.5)]'
+        ? 'bg-[#020408]/80 backdrop-blur-2xl border-b border-primary/20 shadow-[0_4px_30px_rgba(0,0,0,0.5)]'
         : 'bg-transparent border-b border-transparent'
         }`}
     >
+      {/* Scroll Progress Bar */}
+      <motion.div
+        className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-primary/40 via-primary to-primary/40 origin-left z-50"
+        style={{ scaleX }}
+      />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex justify-between items-center h-20 md:h-24">
           {/* Logo */}
-          <motion.a
-            href="/#home"
-            className="flex items-center gap-3 group"
-            whileHover={{ scale: 1.02 }}
-          >
-            <div className="flex items-end gap-[2px] relative">
+          <div className="flex-shrink-0 flex items-center">
+            <motion.a
+              href="#home"
+              className="flex items-center gap-3 group relative"
+              whileHover={{ scale: 1.02 }}
+            >
               {/* Logo Pulsing Ground Glow */}
               <motion.div
-                className="absolute inset-x-0 bottom-0 h-4 bg-primary/20 blur-xl rounded-full"
-                animate={{ opacity: [0.2, 0.5, 0.2], scale: [0.8, 1.1, 0.8] }}
+                className="absolute inset-x-0 bottom-[-10px] h-6 bg-primary/25 blur-2xl rounded-full"
+                animate={{
+                  opacity: isScrolled ? [0.2, 0.4, 0.2] : [0.4, 0.7, 0.4],
+                  scale: [0.8, 1.2, 0.8]
+                }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               />
 
-              {/* V Logo Mark */}
-              <svg
-                viewBox="0 0 100 100"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-[2.5rem] md:h-[3.5rem] w-auto mb-1 relative z-10"
-              >
-                <motion.path
-                  d="M0 0L40 100L55 100L15 0H0Z"
-                  fill="#22d3ee"
-                  animate={{ fill: ['#22d3ee', '#3b82f6', '#22d3ee'] }}
-                  transition={{ duration: 5, repeat: Infinity }}
-                />
-                <motion.path
-                  d="M100 0L60 100L45 100L85 0H100Z"
-                  fill="#3b82f6"
-                  animate={{ fill: ['#3b82f6', '#22d3ee', '#3b82f6'] }}
-                  transition={{ duration: 5, repeat: Infinity }}
-                />
-              </svg>
+              <div className="flex items-end gap-[1.5px] items-center relative z-10">
+                {/* V Logo Mark */}
+                <svg
+                  viewBox="0 0 100 100"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-[2.5rem] md:h-[3.5rem] w-auto"
+                >
+                  <motion.path
+                    d="M0 0L40 100L55 100L15 0H0Z"
+                    fill="#22d3ee"
+                    animate={{ fill: ['#22d3ee', '#3b82f6', '#22d3ee'] }}
+                    transition={{ duration: 5, repeat: Infinity }}
+                  />
+                  <motion.path
+                    d="M100 0L60 100L45 100L85 0H100Z"
+                    fill="#3b82f6"
+                    animate={{ fill: ['#3b82f6', '#22d3ee', '#3b82f6'] }}
+                    transition={{ duration: 5, repeat: Infinity }}
+                  />
+                </svg>
 
-              {/* YO */}
-              <span className="text-[2.5rem] md:text-[3.5rem] font-bold leading-none tracking-tight font-['Outfit'] text-cyan-400 relative z-10 group-hover:text-white transition-colors duration-500">
-                YO
-              </span>
-
-
-              {/* N + LABS */}
-              <div className="flex flex-col items-center leading-none translate-y-[1px] relative z-10">
-                <span className="text-[2.5rem] md:text-[3.5rem] font-bold tracking-tight font-['Outfit'] text-cyan-400 group-hover:text-white transition-colors duration-500">
-                  N
+                {/* YO */}
+                <span className="text-[2.5rem] md:text-[3.5rem] font-bold leading-none tracking-tight font-['Outfit'] text-cyan-400 group-hover:text-white transition-colors duration-500">
+                  YO
                 </span>
 
-                <span className="mt-[1px] text-[0.45rem] md:text-[0.55rem] font-medium tracking-[0.35em] text-white glowing-text-labs">
-                  LABS
-                </span>
+                {/* N + LABS */}
+                <div className="flex flex-col items-center leading-none translate-y-[1px]">
+                  <span className="text-[2.5rem] md:text-[3.5rem] font-bold tracking-tight font-['Outfit'] text-cyan-400 group-hover:text-white transition-colors duration-500">
+                    N
+                  </span>
+                  <span className="mt-[1px] text-[0.45rem] md:text-[0.55rem] font-medium tracking-[0.35em] text-white glowing-text-labs">
+                    LABS
+                  </span>
+                </div>
               </div>
-            </div>
-
-          </motion.a>
+            </motion.a>
+          </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
@@ -153,7 +166,7 @@ const Navbar = () => {
           </div>
         </motion.div>
       )}
-    </motion.nav>
+    </nav>
   );
 };
 

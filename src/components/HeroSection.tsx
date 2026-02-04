@@ -7,8 +7,42 @@ const HeroSection = () => {
     <section id="home" className="relative min-h-screen flex items-center overflow-hidden bg-[#020408]">
       {/* Background Effects - Removed grid and haze for clear black vibe */}
 
+      {/* BACKGROUND TWINKLING STARS - NEW HIGH-END LAYER */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        {[...Array(100)].map((_, i) => {
+          const size = Math.random() * 2;
+          const left = Math.random() * 100;
+          const top = Math.random() * 100;
+          const delay = Math.random() * 5;
+          const duration = 2 + Math.random() * 3;
+          return (
+            <motion.div
+              key={`star-${i}`}
+              className="absolute bg-white rounded-full"
+              style={{
+                width: size,
+                height: size,
+                left: `${left}%`,
+                top: `${top}%`,
+                boxShadow: size > 1.5 ? '0 0 4px white' : 'none',
+              }}
+              animate={{
+                opacity: [0.1, 0.8, 0.1],
+                scale: [1, 1.2, 1],
+              }}
+              transition={{
+                duration: duration,
+                repeat: Infinity,
+                delay: delay,
+                ease: "easeInOut",
+              }}
+            />
+          );
+        })}
+      </div>
+
       {/* Floating particles - ENHANCED VARIETY & DEPTH */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-[1]">
         {[...Array(30)].map((_, i) => {
           const size = Math.random() * 1.5 + 0.5;
           const opacity = Math.random() * 0.4 + 0.15;
