@@ -7,67 +7,56 @@ const HeroSection = () => {
     <section id="home" className="relative min-h-screen flex items-center overflow-hidden bg-[#020408]">
       {/* Background Effects - Removed grid and haze for clear black vibe */}
 
-      {/* BACKGROUND TWINKLING STARS - NEW HIGH-END LAYER */}
+      {/* BACKGROUND TWINKLING STARS - CSS OPTIMIZED */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        {[...Array(100)].map((_, i) => {
+        {[...Array(80)].map((_, i) => {
           const size = Math.random() * 2;
           const left = Math.random() * 100;
           const top = Math.random() * 100;
           const delay = Math.random() * 5;
           const duration = 2 + Math.random() * 3;
           return (
-            <motion.div
+            <div
               key={`star-${i}`}
-              className="absolute bg-white rounded-full"
+              className="absolute bg-white rounded-full star-twinkle"
               style={{
                 width: size,
                 height: size,
                 left: `${left}%`,
                 top: `${top}%`,
                 boxShadow: size > 1.5 ? '0 0 4px white' : 'none',
-              }}
-              animate={{
-                opacity: [0.1, 0.8, 0.1],
-                scale: [1, 1.2, 1],
-              }}
-              transition={{
-                duration: duration,
-                repeat: Infinity,
-                delay: delay,
-                ease: "easeInOut",
+                // @ts-ignore
+                '--twinkle-duration': `${duration}s`,
+                '--twinkle-delay': `${delay}s`,
               }}
             />
           );
         })}
       </div>
 
-      {/* Floating particles - ENHANCED VARIETY & DEPTH */}
+      {/* Floating particles - CSS OPTIMIZED */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-[1]">
-        {[...Array(30)].map((_, i) => {
+        {[...Array(20)].map((_, i) => {
           const size = Math.random() * 1.5 + 0.5;
-          const opacity = Math.random() * 0.4 + 0.15;
+          const opacity = Math.random() * 0.3 + 0.1;
           const duration = 4 + Math.random() * 4;
+          const floatX = Math.random() * 40 - 20;
+          const floatY = Math.random() * 40 - 20;
           return (
-            <motion.div
+            <div
               key={i}
-              className="absolute bg-primary rounded-full shadow-[0_0_2px_rgba(255,255,255,0.3)]"
+              className="absolute bg-primary rounded-full shadow-[0_0_2px_rgba(255,255,255,0.3)] particle-float"
               style={{
                 width: size,
                 height: size,
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
                 opacity: opacity,
-              }}
-              animate={{
-                y: [0, Math.random() * 40 - 20, 0],
-                x: [0, Math.random() * 40 - 20, 0],
-                opacity: [opacity, opacity * 1.5, opacity],
-              }}
-              transition={{
-                duration: duration,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: Math.random() * 5,
+                // @ts-ignore
+                '--float-duration': `${duration}s`,
+                '--float-delay': `${Math.random() * 5}s`,
+                '--float-x': `${floatX}px`,
+                '--float-y': `${floatY}px`,
               }}
             />
           );

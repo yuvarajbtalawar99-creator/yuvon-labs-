@@ -40,8 +40,8 @@ const Index = () => {
         <WhyChooseSection />
         <TechStackSection />
         <ProjectJourney />
-        <ContactSection />
         <TeamSection />
+        <ContactSection />
         <Footer />
       </div>
     </>
