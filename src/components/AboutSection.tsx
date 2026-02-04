@@ -34,9 +34,10 @@ const AboutSection = () => {
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left - Visual */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8 }}
+            initial={{ opacity: 0, scale: 0.9, rotateY: -10 }}
+            whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 1, ease: 'easeOut' }}
             className="relative"
           >
             <div className="relative aspect-square max-w-lg mx-auto">
@@ -46,7 +47,7 @@ const AboutSection = () => {
                 style={{
                   transform: 'rotate(-6deg)',
                 }}
-                animate={isInView ? { rotate: [-6, -4, -6] } : {}}
+                animate={{ rotate: [-6, -4, -6] }}
                 transition={{ duration: 6, repeat: Infinity }}
               />
               <motion.div
@@ -54,7 +55,7 @@ const AboutSection = () => {
                 style={{
                   transform: 'rotate(3deg)',
                 }}
-                animate={isInView ? { rotate: [3, 5, 3] } : {}}
+                animate={{ rotate: [3, 5, 3] }}
                 transition={{ duration: 8, repeat: Infinity }}
               />
 
@@ -63,7 +64,8 @@ const AboutSection = () => {
                 <motion.span
                   className="text-[10px] sm:text-xs font-semibold tracking-[0.2em] uppercase text-primary/80 mb-2"
                   initial={{ opacity: 0, y: -10 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
                   transition={{ delay: 0.4 }}
                 >
                   Founded in 2025
@@ -72,7 +74,8 @@ const AboutSection = () => {
                 <motion.div
                   className="text-5xl sm:text-6xl font-bold gradient-text mb-1"
                   initial={{ scale: 0 }}
-                  animate={isInView ? { scale: 1 } : {}}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
                   transition={{ delay: 0.3, type: 'spring' }}
                 >
                   10+
@@ -86,55 +89,75 @@ const AboutSection = () => {
                 <div className="w-20 h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent my-5 shadow-[0_0_10px_rgba(34,211,238,0.8)]" />
 
                 <div className="grid gap-3 w-full px-1">
-                  <div className="group">
-                    <div className="text-[10px] sm:text-[11px] font-medium glowing-text-white group-hover:text-primary transition-colors text-center uppercase tracking-wider">
-                      Multiple Domains Served
-                    </div>
-                  </div>
-                  <div className="group">
-                    <div className="text-[10px] sm:text-[11px] font-medium glowing-text-white group-hover:text-primary transition-colors text-center uppercase tracking-wider">
-                      End-to-End Product Development
-                    </div>
-                  </div>
+                  {[
+                    "Multiple Domains Served",
+                    "End-to-End Product Development"
+                  ].map((text, i) => (
+                    <motion.div
+                      key={text}
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.6 + i * 0.1 }}
+                      className="group"
+                    >
+                      <div className="text-[10px] sm:text-[11px] font-medium glowing-text-white group-hover:text-primary transition-colors text-center uppercase tracking-wider">
+                        {text}
+                      </div>
+                    </motion.div>
+                  ))}
                 </div>
               </div>
             </div>
           </motion.div>
 
           {/* Right - Content */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="space-y-8"
-          >
+          <div className="space-y-8">
             {/* Section header */}
-            <div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
               <motion.span
                 className="text-primary text-sm font-semibold tracking-wider uppercase"
                 initial={{ opacity: 0 }}
-                animate={isInView ? { opacity: 1 } : {}}
-                transition={{ delay: 0.4 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
               >
                 Who We Are
               </motion.span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-3">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-3 leading-tight">
                 A Vision-Driven{' '}
                 <span className="gradient-text">Technology Lab</span>
               </h2>
-            </div>
+            </motion.div>
 
-            <p className="text-lg text-muted-foreground leading-relaxed">
+            <motion.p
+              className="text-lg text-muted-foreground leading-relaxed italic border-l-2 border-primary/20 pl-6"
+              initial={{ opacity: 0, x: 10 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+            >
               <span className="text-primary font-bold">VYON LABS</span> is at the forefront of digital innovation. We are a team of passionate
               engineers, designers, and strategists dedicated to building transformative
               solutions that shape the future of technology.
-            </p>
+            </motion.p>
 
-            <p className="text-muted-foreground leading-relaxed">
+            <motion.p
+              className="text-muted-foreground leading-relaxed"
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+            >
               From AI-powered platforms to scalable cloud architectures, we combine
               deep technical expertise with creative problem-solving to deliver
               exceptional results for clients worldwide.
-            </p>
+            </motion.p>
 
             {/* Features */}
             <div className="space-y-6 pt-4">
@@ -142,21 +165,22 @@ const AboutSection = () => {
                 <motion.div
                   key={feature.title}
                   initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
                   transition={{ delay: 0.5 + i * 0.1 }}
-                  className="flex gap-4 items-start"
+                  className="flex gap-4 items-start group p-2 rounded-xl transition-colors hover:bg-primary/5"
                 >
-                  <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20">
+                  <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20 group-hover:border-primary/50 transition-colors">
                     <feature.icon className="w-5 h-5 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-foreground">{feature.title}</h3>
-                    <p className="text-sm text-muted-foreground mt-1">{feature.description}</p>
+                    <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">{feature.title}</h3>
+                    <p className="text-sm text-muted-foreground mt-1 leading-relaxed">{feature.description}</p>
                   </div>
                 </motion.div>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

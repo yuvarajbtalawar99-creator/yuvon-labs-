@@ -96,13 +96,29 @@ const ServicesSection = () => {
         </motion.div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={{
+            hidden: { opacity: 0 },
+            show: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.1,
+                delayChildren: 0.3
+              }
+            }
+          }}
+        >
           {services.map((service, i) => (
             <motion.div
               key={service.title}
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: service.delay }}
+              variants={{
+                hidden: { opacity: 0, y: 50, scale: 0.9 },
+                show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.8, ease: "easeOut" } }
+              }}
               className="group relative"
             >
               {/* Floating Animation */}
@@ -121,13 +137,21 @@ const ServicesSection = () => {
               >
                 {/* Card */}
                 <div className={`
-                  relative h-full p-6 rounded-2xl transition-all duration-500
+                  relative h-full p-6 rounded-2xl transition-all duration-700
                   backdrop-blur-xl bg-gradient-to-br from-white/10 to-transparent
                   border ${service.featured ? 'border-primary/40' : 'border-white/10'}
-                  group-hover:border-white/30 group-hover:-translate-y-2
-                  shadow-2xl shadow-black/40 group-hover:shadow-primary/20
-                  perspective-1000
+                  group-hover:border-primary/50 group-hover:-translate-y-3
+                  shadow-2xl shadow-black/40 group-hover:shadow-primary/30
+                  perspective-1000 overflow-hidden
                 `}>
+                  {/* Subtle Shimmer Effect on view */}
+                  <motion.div
+                    className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent"
+                    initial={{ left: '-100%' }}
+                    whileInView={{ left: '100%' }}
+                    transition={{ duration: 1.5, delay: 0.5 + i * 0.1, ease: "easeInOut" }}
+                  />
+
                   {/* Featured Badge */}
                   {service.badge && (
                     <div className={`absolute -top-2.5 -right-2 px-3 py-1 rounded-full
@@ -159,7 +183,7 @@ const ServicesSection = () => {
                       }}
                       className={`w-14 h-14 rounded-xl bg-gradient-to-br ${service.color} 
                         flex items-center justify-center relative
-                        transform transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3 translate-z-10 shadow-lg`}
+                        transform transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6 translate-z-10 shadow-lg`}
                     >
                       <service.icon className="w-7 h-7 text-white filter drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]" strokeWidth={2} />
 
@@ -172,11 +196,11 @@ const ServicesSection = () => {
                   </div>
 
                   {/* Content */}
-                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors">
+                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors duration-300">
                     {service.title}
                   </h3>
 
-                  <p className="text-gray-400 mb-5 leading-relaxed text-xs">
+                  <p className="text-gray-400 mb-5 leading-relaxed text-xs group-hover:text-gray-300 transition-colors">
                     {service.description}
                   </p>
 
@@ -186,9 +210,9 @@ const ServicesSection = () => {
                       <span
                         key={tag}
                         className={`px-2.5 py-1 rounded-full text-[10px] font-medium
-                          border border-white/10 bg-white/5
+                          border border-white/5 bg-white/5
                           text-muted-foreground
-                          group-hover:border-primary/30 group-hover:text-foreground
+                          group-hover:border-primary/40 group-hover:text-foreground group-hover:bg-primary/5
                           transition-all duration-300`}
                       >
                         {tag}
@@ -199,7 +223,7 @@ const ServicesSection = () => {
               </motion.div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

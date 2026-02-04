@@ -72,66 +72,82 @@ const ProjectsSection = () => {
         </motion.div>
 
         {/* Projects Grid */}
-        <div className="grid md:grid-cols-2 gap-8">
+        <motion.div
+          className="grid md:grid-cols-2 gap-8"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={{
+            hidden: { opacity: 0 },
+            show: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.2
+              }
+            }
+          }}
+        >
           {projects.map((project, i) => (
             <motion.div
               key={project.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: i * 0.15 }}
+              variants={{
+                hidden: { opacity: 0, y: 30, scale: 0.95 },
+                show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.8, ease: "easeOut" } }
+              }}
               className="group cursor-pointer"
             >
-              <div className="glass-card overflow-hidden transition-all duration-500 hover:-translate-y-2">
+              <div className="glass-card overflow-hidden transition-all duration-700 hover:-translate-y-4 hover:shadow-primary/20 shadow-2xl relative">
                 {/* Image/Gradient */}
                 <div
                   className="h-48 sm:h-56 relative overflow-hidden"
                   style={{ background: project.image }}
                 >
                   {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
 
                   {/* Category badge */}
-                  <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 text-xs rounded-full bg-background/50 backdrop-blur-sm text-foreground border border-border/50">
+                  <div className="absolute top-4 left-4 z-10">
+                    <span className="px-3 py-1 text-[10px] font-bold tracking-[0.1em] uppercase rounded-full bg-background/60 backdrop-blur-md text-primary border border-primary/20 shadow-lg">
                       {project.category}
                     </span>
                   </div>
 
                   {/* Hover icons */}
-                  <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                  <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-[-10px] group-hover:translate-y-0 z-10">
                     <motion.a
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      whileHover={{ scale: 1.1 }}
+                      whileHover={{ scale: 1.1, backgroundColor: 'rgba(34, 211, 238, 0.2)' }}
                       whileTap={{ scale: 0.95 }}
-                      className="w-10 h-10 rounded-full bg-background/50 backdrop-blur-sm flex items-center justify-center border border-border/50 hover:border-primary/50"
+                      className="w-10 h-10 rounded-full bg-background/60 backdrop-blur-md flex items-center justify-center border border-primary/20 text-primary transition-colors"
                     >
-                      <Github className="w-4 h-4" />
+                      <Github className="w-5 h-5" />
                     </motion.a>
                     <motion.a
                       href={project.externalUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      whileHover={{ scale: 1.1 }}
+                      whileHover={{ scale: 1.1, backgroundColor: 'rgba(34, 211, 238, 0.2)' }}
                       whileTap={{ scale: 0.95 }}
-                      className="w-10 h-10 rounded-full bg-background/50 backdrop-blur-sm flex items-center justify-center border border-border/50 hover:border-primary/50"
+                      className="w-10 h-10 rounded-full bg-background/60 backdrop-blur-md flex items-center justify-center border border-primary/20 text-primary transition-colors"
                     >
-                      <ExternalLink className="w-4 h-4" />
+                      <ExternalLink className="w-5 h-5" />
                     </motion.a>
                   </div>
 
                   {/* Animated lines */}
-                  <svg className="absolute inset-0 w-full h-full opacity-20 pointer-events-none">
+                  <svg className="absolute inset-0 w-full h-full opacity-30 pointer-events-none">
                     <motion.line
                       x1="0%"
                       y1="100%"
                       x2="100%"
                       y2="0%"
-                      stroke="white"
+                      stroke="currentColor"
+                      className="text-primary/50"
                       strokeWidth="0.5"
                       initial={{ pathLength: 0 }}
-                      animate={isInView ? { pathLength: 1 } : {}}
+                      whileInView={{ pathLength: 1 }}
                       transition={{ duration: 2, delay: i * 0.2 }}
                     />
                     <motion.line
@@ -139,21 +155,22 @@ const ProjectsSection = () => {
                       y1="100%"
                       x2="100%"
                       y2="50%"
-                      stroke="white"
+                      stroke="currentColor"
+                      className="text-primary/30"
                       strokeWidth="0.5"
                       initial={{ pathLength: 0 }}
-                      animate={isInView ? { pathLength: 1 } : {}}
+                      whileInView={{ pathLength: 1 }}
                       transition={{ duration: 2, delay: i * 0.2 + 0.3 }}
                     />
                   </svg>
                 </div>
 
                 {/* Content */}
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+                <div className="p-6 relative">
+                  <h3 className="text-xl font-bold font-['Outfit'] text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
                     {project.title}
                   </h3>
-                  <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
+                  <p className="text-muted-foreground text-xs leading-relaxed mb-6 line-clamp-2">
                     {project.description}
                   </p>
 
@@ -162,17 +179,20 @@ const ProjectsSection = () => {
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="px-2 py-1 text-xs rounded bg-muted text-muted-foreground"
+                        className="px-3 py-1 text-[10px] font-bold uppercase tracking-widest rounded-md bg-primary/5 text-primary/80 border border-primary/10 group-hover:border-primary/30 transition-colors"
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
+
+                  {/* Shimmer on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
                 </div>
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* View All Button */}
         <motion.div
