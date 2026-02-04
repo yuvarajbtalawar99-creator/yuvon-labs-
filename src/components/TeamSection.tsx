@@ -79,7 +79,7 @@ const TeamSection = () => {
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1 }}
                             whileHover={{ y: -5 }}
-                            className="glass-card-glow group p-6 flex flex-col items-center text-center"
+                            className={`glass-card-glow group p-6 flex flex-col items-center text-center ${member.name === 'Yuvaraj' ? 'border-primary/40 ring-1 ring-primary/20 scale-105 z-10' : ''}`}
                         >
                             <div className="relative mb-6">
                                 <div className="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-2 border-primary/20 group-hover:border-primary/50 transition-colors duration-300">
