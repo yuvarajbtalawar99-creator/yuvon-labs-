@@ -121,6 +121,13 @@
      background: linear-gradient(to bottom, hsl(185 90% 60%), hsl(210 90% 60%));
      box-shadow: 0 0 15px hsl(185 80% 50% / 0.8);
    }
+
+   /* Global Custom Cursor Support */
+   @media (min-width: 768px) {
+     * {
+       cursor: none !important;
+     }
+   }
  }
 
  @layer components {
