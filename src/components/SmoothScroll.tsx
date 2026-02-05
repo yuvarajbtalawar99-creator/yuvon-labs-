@@ -31,10 +31,13 @@ const SmoothScroll = ({ children }: SmoothScrollProps) => {
             const anchor = target.closest('a');
 
             if (anchor && anchor.hash && anchor.origin === window.location.origin) {
-                e.preventDefault();
-                const targetElement = document.querySelector(anchor.hash);
-                if (targetElement) {
-                    lenis.scrollTo(targetElement as HTMLElement);
+                // Only prevent default if we are on the same page
+                if (anchor.pathname === window.location.pathname) {
+                    e.preventDefault();
+                    const targetElement = document.querySelector(anchor.hash);
+                    if (targetElement) {
+                        lenis.scrollTo(targetElement as HTMLElement);
+                    }
                 }
             }
         };
