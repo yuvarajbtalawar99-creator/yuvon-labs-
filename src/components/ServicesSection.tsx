@@ -142,11 +142,11 @@ const ServicesSection = () => {
                   border ${service.featured ? 'border-primary/40' : 'border-white/10'}
                   group-hover:border-primary/50 group-hover:-translate-y-3
                   shadow-2xl shadow-black/40 group-hover:shadow-primary/30
-                  perspective-1000 overflow-hidden
+                  perspective-1000
                 `}>
                   {/* Subtle Shimmer Effect on view */}
                   <motion.div
-                    className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent"
+                    className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent overflow-hidden rounded-t-2xl"
                     initial={{ left: '-100%' }}
                     whileInView={{ left: '100%' }}
                     transition={{ duration: 1.5, delay: 0.5 + i * 0.1, ease: "easeInOut" }}
@@ -154,14 +154,14 @@ const ServicesSection = () => {
 
                   {/* Featured Badge */}
                   {service.badge && (
-                    <div className={`absolute -top-2.5 -right-2 px-3 py-1 rounded-full
+                    <div className={`absolute -top-3 -right-3 px-3 py-1.5 rounded-full
                       bg-gradient-to-r ${service.color}
-                      text-white text-[10px] font-bold
-                      shadow-lg shadow-black/20
-                      flex items-center gap-1
+                      text-white text-[11px] font-bold
+                      shadow-lg shadow-black/30
+                      flex items-center gap-1.5
                       animate-pulse z-20`}
                     >
-                      <Sparkles className="w-2.5 h-2.5" />
+                      <Sparkles className="w-3 h-3" />
                       {service.badge}
                     </div>
                   )}
