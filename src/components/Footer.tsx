@@ -21,12 +21,12 @@ const Footer = () => {
   ];
 
   const footerLinks = [
-    { name: 'Home', href: '/#home' },
-    { name: 'Services', href: '/#services' },
-    { name: 'About', href: '/#about' },
-    { name: 'Projects', href: '/#projects' },
-    { name: 'Team', href: '/#team' },
-    { name: 'Contact', href: '/#contact' },
+    { name: 'Home', path: '/' },
+    { name: 'Services', path: '/services' },
+    { name: 'About', path: '/about' },
+    { name: 'Projects', path: '/projects' },
+    { name: 'Team', path: '/team' },
+    { name: 'Contact', path: '/contact' },
   ];
 
   return (
@@ -41,50 +41,54 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-12">
           {/* Logo & Description */}
           <div className="space-y-6 flex-1">
-            <motion.a
-              href="/#home"
+            <Link
+              to="/"
               className="flex items-center gap-3 group"
-              whileHover={{ scale: 1.02 }}
             >
-              <div className="flex items-end gap-[1.5px] items-center">
-                {/* V Logo Mark */}
-                <svg
-                  viewBox="0 0 100 100"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-[2rem] w-auto"
-                >
-                  <motion.path
-                    d="M0 0L40 100L55 100L15 0H0Z"
-                    fill="#22d3ee"
-                    animate={{ fill: ['#22d3ee', '#3b82f6', '#22d3ee'] }}
-                    transition={{ duration: 5, repeat: Infinity }}
-                  />
-                  <motion.path
-                    d="M100 0L60 100L45 100L85 0H100Z"
-                    fill="#3b82f6"
-                    animate={{ fill: ['#3b82f6', '#22d3ee', '#3b82f6'] }}
-                    transition={{ duration: 5, repeat: Infinity }}
-                  />
-                </svg>
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                className="flex items-center gap-3"
+              >
+                <div className="flex items-end gap-[1.5px] items-center">
+                  {/* V Logo Mark */}
+                  <svg
+                    viewBox="0 0 100 100"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-[2rem] w-auto"
+                  >
+                    <motion.path
+                      d="M0 0L40 100L55 100L15 0H0Z"
+                      fill="#22d3ee"
+                      animate={{ fill: ['#22d3ee', '#3b82f6', '#22d3ee'] }}
+                      transition={{ duration: 5, repeat: Infinity }}
+                    />
+                    <motion.path
+                      d="M100 0L60 100L45 100L85 0H100Z"
+                      fill="#3b82f6"
+                      animate={{ fill: ['#3b82f6', '#22d3ee', '#3b82f6'] }}
+                      transition={{ duration: 5, repeat: Infinity }}
+                    />
+                  </svg>
 
-                {/* YO */}
-                <span className="text-[2rem] font-bold leading-none tracking-tight font-['Outfit'] text-cyan-400 group-hover:text-white transition-colors duration-500">
-                  YO
-                </span>
-
-                {/* N + LABS */}
-                <div className="flex flex-col items-center leading-none">
-                  <span className="text-[2rem] font-bold tracking-tight font-['Outfit'] text-cyan-400 group-hover:text-white transition-colors duration-500">
-                    N
+                  {/* YO */}
+                  <span className="text-[2rem] font-bold leading-none tracking-tight font-['Outfit'] text-cyan-400 group-hover:text-white transition-colors duration-500">
+                    YO
                   </span>
 
-                  <span className="mt-[1px] text-[0.35rem] font-medium tracking-[0.32em] text-white/90 glowing-text-labs">
-                    LABS
-                  </span>
+                  {/* N + LABS */}
+                  <div className="flex flex-col items-center leading-none">
+                    <span className="text-[2rem] font-bold tracking-tight font-['Outfit'] text-cyan-400 group-hover:text-white transition-colors duration-500">
+                      N
+                    </span>
+
+                    <span className="mt-[1px] text-[0.35rem] font-medium tracking-[0.32em] text-white/90 glowing-text-labs">
+                      LABS
+                    </span>
+                  </div>
                 </div>
-              </div>
-            </motion.a>
+              </motion.div>
+            </Link>
             <p className="text-sm text-muted-foreground max-w-sm leading-relaxed">
               Engineering the future with cutting-edge AI, cloud, and software solutions.
               Transforming bold ideas into global-scale reality.
@@ -98,13 +102,13 @@ const Footer = () => {
               <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-primary/80">Navigation</h4>
               <nav className="flex flex-col gap-3">
                 {footerLinks.map((link) => (
-                  <a
+                  <Link
                     key={link.name}
-                    href={link.href}
+                    to={link.path}
                     className="text-sm text-muted-foreground hover:text-primary transition-colors"
                   >
                     {link.name}
-                  </a>
+                  </Link>
                 ))}
               </nav>
             </div>
