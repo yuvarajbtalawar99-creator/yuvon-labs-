@@ -120,12 +120,12 @@ const TermsOfService = () => {
                                     <p className="flex items-center gap-2">
                                         <span className="text-muted-foreground">Email:</span>
                                         <a
-                                            href="https://mail.google.com/mail/?view=cm&fs=1&to=vyonailabs@gmail.com"
+                                            href="https://mail.google.com/mail/?view=cm&fs=1&to=vyonlabsofficial@gmail.com"
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="text-foreground hover:text-primary transition-colors"
                                         >
-                                            vyonailabs@gmail.com
+                                            vyonlabsofficial@gmail.com
                                         </a>
                                     </p>
                                     <p className="flex items-center gap-2">

@@ -25,7 +25,7 @@ const ContactSection = () => {
     );
 
     // Direct Gmail Compose URL
-    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=vyonailabs@gmail.com&su=${subject}&body=${body}`;
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=vyonlabsofficial@gmail.com&su=${subject}&body=${body}`;
 
     // Open in new tab
     window.open(gmailUrl, '_blank');
