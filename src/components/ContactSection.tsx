@@ -38,17 +38,17 @@ const ContactSection = () => {
     {
       icon: Mail,
       label: 'Email',
-      value: 'vyonailabs@gmail.com',
+      value: 'vyonlabsofficial@gmail.com',
     },
     {
       icon: Phone,
       label: 'Phone',
-      value: '+91 6363221706'
+      value: '+91 6363221706, 8792179557'
     },
     {
       icon: MapPin,
       label: 'Location',
-      value: 'India',
+      value: 'Belagavi, Karnataka, India',
     },
   ];
 
