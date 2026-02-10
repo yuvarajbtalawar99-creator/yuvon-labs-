@@ -15,7 +15,7 @@ const Footer = () => {
       label: 'X (Twitter)'
     },
     { icon: Linkedin, href: 'https://www.linkedin.com/in/yuvaraj-b-talawar-4280842b9/', label: 'LinkedIn' },
-    { icon: Github, href: 'https://github.com/vyonailabs?tab=repositories', label: 'GitHub' },
+    { icon: Github, href: 'https://github.com/vyonlabsofficial-lang', label: 'GitHub' },
     { icon: Instagram, href: 'https://www.instagram.com/vyonlabs/', label: 'Instagram' },
     { icon: Youtube, href: 'https://www.youtube.com/@VyonLabsofficial', label: 'YouTube' },
   ];
