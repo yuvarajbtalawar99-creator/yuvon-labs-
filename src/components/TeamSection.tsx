@@ -4,7 +4,7 @@ import { useRef } from 'react';
 const teamMembers = [
     {
         name: 'Yuvaraj',
-        role: 'Operations Lead & Developer',
+        role: 'Operations Lead & Tech Manager',
         image: '/team/Yuvaraj.jpeg',
     },
     {
@@ -19,8 +19,8 @@ const teamMembers = [
     },
     {
         name: 'Arihant',
-        role: 'Developer',
-        image: '/team/Arihant.jpeg',
+        role: 'Tech Manager',
+        image: '/team/Arihant.png',
     }
 ];
 
