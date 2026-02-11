@@ -10,7 +10,7 @@ const teamMembers = [
     {
         name: 'Sourabh',
         role: 'Marketing Head & Business Analyst',
-        image: '/team/Sourabh.jpeg',
+        image: '/team/Sourabh.png',
     },
     {
         name: 'Aditi',
@@ -80,8 +80,8 @@ const TeamSection = () => {
                             transition={{ delay: index * 0.1, duration: 0.8 }}
                             whileHover={{ y: -10, transition: { duration: 0.4 } }}
                             className={`glass-card-glow group p-6 flex flex-col items-center text-center transition-all duration-500 relative ${member.name === 'Yuvaraj'
-                                    ? 'border-primary/40 shadow-[0_0_20px_rgba(34,211,238,0.15)] ring-1 ring-primary/20 scale-105 z-10 bg-primary/5'
-                                    : 'hover:bg-white/5'
+                                ? 'border-primary/40 shadow-[0_0_20px_rgba(34,211,238,0.15)] ring-1 ring-primary/20 scale-105 z-10 bg-primary/5'
+                                : 'hover:bg-white/5'
                                 }`}
                         >
                             <div className="relative mb-6">
